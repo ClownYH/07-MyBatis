@@ -5,7 +5,7 @@ import com.ohgiraffers.section02.javaconfig.controller.MenuController;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.ohgiraffers.section02.javaconfig.template.JavaConfigTemplate.*;
+import static com.ohgiraffers.common.Template.getJavaSqlSession;
 
 public class Application {
 

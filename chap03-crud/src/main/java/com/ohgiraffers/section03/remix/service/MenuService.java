@@ -1,23 +1,23 @@
-package com.ohgiraffers.section02.javaconfig.service;
+package com.ohgiraffers.section03.remix.service;
 
 import com.ohgiraffers.dto.MenuDTO;
-import com.ohgiraffers.section02.javaconfig.model.JavaMenuDAO;
+import com.ohgiraffers.section03.remix.model.RemixMenuDAO;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 
-import static com.ohgiraffers.common.Template.getJavaSqlSession;
+import static com.ohgiraffers.common.Template.getRemixSession;
 
 public class MenuService {
 
-    private JavaMenuDAO menuDAO;
+    private RemixMenuDAO menuDAO;
 
 
     public List<MenuDTO> selectAllMenu(){
-        SqlSession session = getJavaSqlSession();
+        SqlSession session = getRemixSession();
 
-        menuDAO = session.getMapper(JavaMenuDAO.class);
-        List<MenuDTO> menuList = menuDAO.selectAllMenu(session);
+        menuDAO = session.getMapper(RemixMenuDAO.class);
+        List<MenuDTO> menuList = menuDAO.selectAllMenu();
 
         session.close();
 
@@ -25,16 +25,16 @@ public class MenuService {
     }
 
     public MenuDTO selectByMenuCode(int code) {
-        SqlSession session = getJavaSqlSession();
-        menuDAO = session.getMapper(JavaMenuDAO.class);
+        SqlSession session = getRemixSession();
+        menuDAO = session.getMapper(RemixMenuDAO.class);
         MenuDTO menu = menuDAO.selectByMenuCode(code);
         session.close();
         return menu;
     }
 
     public boolean registMenu(MenuDTO menu) {
-        SqlSession session = getJavaSqlSession();
-        menuDAO = session.getMapper(JavaMenuDAO.class);
+        SqlSession session = getRemixSession();
+        menuDAO = session.getMapper(RemixMenuDAO.class);
 
         int result = menuDAO.registMenu(menu);
         if(result > 0){
@@ -47,10 +47,10 @@ public class MenuService {
     }
 
     public boolean modifyMenu(MenuDTO menu) {
-        SqlSession session = getJavaSqlSession();
-        menuDAO = session.getMapper(JavaMenuDAO.class);
+        SqlSession session = getRemixSession();
+        menuDAO = session.getMapper(RemixMenuDAO.class);
 
-        int result = menuDAO.modifyMenu(session, menu);
+        int result = menuDAO.modifyMenu(menu);
         if(result > 0){
             session.commit();
         }else {
@@ -61,9 +61,9 @@ public class MenuService {
     }
 
     public boolean deleteMenu(int code) {
-        SqlSession session = getJavaSqlSession();
-        menuDAO = session.getMapper(JavaMenuDAO.class);
-        int result = menuDAO.deleteMenu(session, code);
+        SqlSession session = getRemixSession();
+        menuDAO = session.getMapper(RemixMenuDAO.class);
+        int result = menuDAO.deleteMenu(code);
         if (result > 0) {
             session.commit();
         }else {
